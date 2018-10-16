@@ -43,7 +43,8 @@ include_directories(
 set(ECC_LIBS
   ${CMAKE_CURRENT_BINARY_DIR}/deps/secp256k1/src/secp256k1-build/.libs/libsecp256k1.a
 )
-
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
 
 #--------------------------------------------------------------------------------
 #  CMake's way of creating an executable
@@ -54,4 +55,4 @@ add_executable(spvtest
 add_dependencies(spvtest secp256k1)
 
 # Link the libraries into the binary
-target_link_libraries(spvtest ${ECC_LIBS})
+target_link_libraries(spvtest ${ECC_LIBS} Threads::Threads m)

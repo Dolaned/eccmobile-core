@@ -49,11 +49,11 @@
 #define MAGIC_NUMBER 0xfadbf1ce
 #endif
 #define HEADER_LENGTH      24
-#define MAX_MSG_LENGTH     0x02000000
+#define MAX_MSG_LENGTH     2 * 1024 * 1024
 #define MAX_GETDATA_HASHES 50000
 #define ENABLED_SERVICES   0ULL  // we don't provide full blocks to remote nodes
-#define PROTOCOL_VERSION   60038
-#define MIN_PROTO_VERSION  60037 // peers earlier than this protocol version not supported (need v0.9 txFee relay rules)
+#define PROTOCOL_VERSION   60039
+#define MIN_PROTO_VERSION  60038 // peers earlier than this protocol version not supported (need v0.9 txFee relay rules)
 #define LOCAL_HOST         ((UInt128) { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xff, 0xff, 0x7f, 0x00, 0x00, 0x01 })
 #define CONNECT_TIMEOUT    3.0
 #define MESSAGE_TIMEOUT    10.0
@@ -192,19 +192,19 @@ static int _BRPeerAcceptVersionMessage(BRPeer *peer, const uint8_t *msg, size_t 
         peer->services = UInt64GetLE(&msg[off]);
         off += sizeof(uint64_t);
         peer->timestamp = UInt64GetLE(&msg[off]);
-        off += sizeof(uint64_t);
-        recvServices = UInt64GetLE(&msg[off]);
+        // off += sizeof(uint64_t);
+        // recvServices = UInt64GetLE(&msg[off]);
         off += sizeof(uint64_t);
         recvAddr = UInt128Get(&msg[off]);
-        off += sizeof(UInt128);
-        recvPort = UInt16GetBE(&msg[off]);
-        off += sizeof(uint16_t);
-        fromServices = UInt64GetLE(&msg[off]);
-        off += sizeof(uint64_t);
+        // off += sizeof(UInt128);
+        // recvPort = UInt16GetBE(&msg[off]);
+        // off += sizeof(uint16_t);
+        // fromServices = UInt64GetLE(&msg[off]);
+        // off += sizeof(uint64_t);
         fromAddr = UInt128Get(&msg[off]);
         off += sizeof(UInt128);
-        fromPort = UInt16GetBE(&msg[off]);
-        off += sizeof(uint16_t);
+        // fromPort = UInt16GetBE(&msg[off]);
+        // off += sizeof(uint16_t);
         nonce = UInt64GetLE(&msg[off]);
         off += sizeof(uint64_t);
         strLen = (size_t)BRVarInt(&msg[off], (off <= msgLen ? msgLen - off : 0), &len);
@@ -1251,6 +1251,7 @@ uint64_t BRPeerFeePerKb(BRPeer *peer)
 // sends a bitcoin protocol message to peer
 void BRPeerSendMessage(BRPeer *peer, const uint8_t *msg, size_t msgLen, const char *type)
 {
+    printf("Initial message size%d\n", sizeof(&msg));
     if (msgLen > MAX_MSG_LENGTH) {
         peer_log(peer, "failed to send %s, length %zu is too long", type, msgLen);
     }
@@ -1273,6 +1274,8 @@ void BRPeerSendMessage(BRPeer *peer, const uint8_t *msg, size_t msgLen, const ch
         off += sizeof(uint32_t);
         memcpy(&buf[off], msg, msgLen);
         peer_log(peer, "sending %s", type);
+        printf("message length %d\n", msgLen);
+        printf("sizeof message %d\n", sizeof(msg));
         msgLen = 0;
         socket = ctx->socket;
         if (socket < 0) error = ENOTCONN;
@@ -1296,9 +1299,9 @@ void BRPeerSendMessage(BRPeer *peer, const uint8_t *msg, size_t msgLen, const ch
 void BRPeerSendVersionMessage(BRPeer *peer)
 {
     BRPeerContext *ctx = (BRPeerContext *)peer;
-    size_t off = 0, userAgentLen = strlen(USER_AGENT);
+    size_t off = 0, userAgentLen = sizeof(USER_AGENT);
     uint8_t msg[80 + BRVarIntSize(userAgentLen) + userAgentLen + 5];
-
+    printf("init size %d\n", sizeof(msg));
     UInt32SetLE(&msg[off], PROTOCOL_VERSION); // version
     off += sizeof(uint32_t);
     UInt64SetLE(&msg[off], ENABLED_SERVICES); // services
@@ -1326,6 +1329,7 @@ void BRPeerSendVersionMessage(BRPeer *peer)
     UInt32SetLE(&msg[off], 0); // last block received
     off += sizeof(uint32_t);
     msg[off++] = 0; // relay transactions (0 for SPV bloom filter mode)
+    printf("size of version message %d\n", sizeof(msg));
     BRPeerSendMessage(peer, msg, sizeof(msg), MSG_VERSION);
 }
 

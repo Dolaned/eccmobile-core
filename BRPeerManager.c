@@ -54,7 +54,9 @@ static const struct { uint32_t height; const char *hash; uint32_t timestamp; uin
 };
 
 static const char *dns_seeds[] = {
-    "www.cryptounited.io."
+    "www.cryptounited.io.",
+    "138.197.100.45",
+    "eccnode.altj.com"
 };
 
 #else // main net
@@ -70,7 +72,11 @@ static const struct { uint32_t height; const char *hash; uint32_t timestamp; uin
 };
 
 static const char *dns_seeds[] = {
-    "127.0.0.1."
+    // "www.cryptounited.io.",
+    // "138.197.100.45",
+    // "eccnode.altj.com"
+    "127.0.0.1",
+    // "192.168.1.105"
 };
 
 #endif
@@ -781,16 +787,17 @@ static void _peerConnected(void *info)
     }
     else if (BRPeerLastBlock(peer) + 10 < manager->lastBlock->height) {
         peer_log(peer, "node isn't synced");
+        peer_log(peer, "heighestBlock: %s", BRPeerLastBlock(peer));
         BRPeerDisconnect(peer);
     }
     else if ((peer->services & SERVICES_NODE_BCASH) == SERVICES_NODE_BCASH) {
         peer_log(peer, "b-cash nodes not supported");
         BRPeerDisconnect(peer);
     }
-    else if (BRPeerVersion(peer) >= 70011 && ! (peer->services & SERVICES_NODE_BLOOM)) {
-        peer_log(peer, "node doesn't support SPV mode");
-        BRPeerDisconnect(peer);
-    }
+    // else if (BRPeerVersion(peer) >= 70011 && ! (peer->services & SERVICES_NODE_BLOOM)) {
+        // peer_log(peer, "node doesn't support SPV mode");
+        // BRPeerDisconnect(peer);
+    // }
     else if (manager->downloadPeer && // check if we should stick with the existing download peer
              (BRPeerLastBlock(manager->downloadPeer) >= BRPeerLastBlock(peer) ||
               manager->lastBlock->height >= BRPeerLastBlock(peer))) {
