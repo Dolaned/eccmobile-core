@@ -35,6 +35,7 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/secp256k1
   ${CMAKE_CURRENT_SOURCE_DIR}/secp256k1/src
   ${CMAKE_CURRENT_SOURCE_DIR}/secp256k1/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/uthash
 )
 
 #

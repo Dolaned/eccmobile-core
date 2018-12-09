@@ -192,22 +192,23 @@ static int _BRPeerAcceptVersionMessage(BRPeer *peer, const uint8_t *msg, size_t 
         peer->services = UInt64GetLE(&msg[off]);
         off += sizeof(uint64_t);
         peer->timestamp = UInt64GetLE(&msg[off]);
-        // off += sizeof(uint64_t);
-        // recvServices = UInt64GetLE(&msg[off]);
+        off += sizeof(uint64_t);
+        recvServices = UInt64GetLE(&msg[off]);
         off += sizeof(uint64_t);
         recvAddr = UInt128Get(&msg[off]);
-        // off += sizeof(UInt128);
-        // recvPort = UInt16GetBE(&msg[off]);
-        // off += sizeof(uint16_t);
-        // fromServices = UInt64GetLE(&msg[off]);
-        // off += sizeof(uint64_t);
+        off += sizeof(UInt128);
+        recvPort = UInt16GetBE(&msg[off]);
+        off += sizeof(uint16_t);
+        fromServices = UInt64GetLE(&msg[off]);
+        off += sizeof(uint64_t);
         fromAddr = UInt128Get(&msg[off]);
         off += sizeof(UInt128);
-        // fromPort = UInt16GetBE(&msg[off]);
-        // off += sizeof(uint16_t);
+        fromPort = UInt16GetBE(&msg[off]);
+        off += sizeof(uint16_t);
         nonce = UInt64GetLE(&msg[off]);
         off += sizeof(uint64_t);
-        strLen = (size_t)BRVarInt(&msg[off], (off <= msgLen ? msgLen - off : 0), &len);
+        strLen = (size_t)BRVarInt(&msg[off], (off < msgLen ? msgLen - off : 0), &len);
+        //strLen = (size_t)BRVarInt(&msg[off], (off <= msgLen ? ÷msgLen - off : 0), &len);
         off += len;
 
         if (off + strLen + sizeof(uint32_t) > msgLen) {
@@ -1251,7 +1252,6 @@ uint64_t BRPeerFeePerKb(BRPeer *peer)
 // sends a bitcoin protocol message to peer
 void BRPeerSendMessage(BRPeer *peer, const uint8_t *msg, size_t msgLen, const char *type)
 {
-    printf("Initial message size%d\n", sizeof(&msg));
     if (msgLen > MAX_MSG_LENGTH) {
         peer_log(peer, "failed to send %s, length %zu is too long", type, msgLen);
     }
@@ -1274,6 +1274,7 @@ void BRPeerSendMessage(BRPeer *peer, const uint8_t *msg, size_t msgLen, const ch
         off += sizeof(uint32_t);
         memcpy(&buf[off], msg, msgLen);
         peer_log(peer, "sending %s", type);
+        printf("message type %s\n", type);
         printf("message length %d\n", msgLen);
         printf("sizeof message %d\n", sizeof(msg));
         msgLen = 0;
@@ -1299,11 +1300,16 @@ void BRPeerSendMessage(BRPeer *peer, const uint8_t *msg, size_t msgLen, const ch
 void BRPeerSendVersionMessage(BRPeer *peer)
 {
     BRPeerContext *ctx = (BRPeerContext *)peer;
-    size_t off = 0, userAgentLen = sizeof(USER_AGENT);
+    size_t off = 0, userAgentLen = sizeof(USER_AGENT) -1;
     uint8_t msg[80 + BRVarIntSize(userAgentLen) + userAgentLen + 5];
+
+
     printf("init size %d\n", sizeof(msg));
+    printf("user agent length%d\n", sizeof(USER_AGENT));
+    printf("user agent length %d\n", userAgentLen);
+
     UInt32SetLE(&msg[off], PROTOCOL_VERSION); // version
-    off += sizeof(uint32_t);
+    off += sizeof(int);
     UInt64SetLE(&msg[off], ENABLED_SERVICES); // services
     off += sizeof(uint64_t);
     UInt64SetLE(&msg[off], time(NULL)); // timestamp
@@ -1323,7 +1329,7 @@ void BRPeerSendVersionMessage(BRPeer *peer)
     ctx->nonce = ((uint64_t)BRRand(0) << 32) | (uint64_t)BRRand(0); // random nonce
     UInt64SetLE(&msg[off], ctx->nonce);
     off += sizeof(uint64_t);
-    off += BRVarIntSet(&msg[off], (off <= sizeof(msg) ? sizeof(msg) - off : 0), userAgentLen);
+    off += BRVarIntSet(&msg[off], (off < sizeof(msg) ? sizeof(msg) - off : 0), userAgentLen);
     strncpy((char *)&msg[off], USER_AGENT, userAgentLen); // user agent string
     off += userAgentLen;
     UInt32SetLE(&msg[off], 0); // last block received
