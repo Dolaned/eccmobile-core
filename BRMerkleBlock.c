@@ -30,6 +30,7 @@
 #include <limits.h>
 #include <string.h>
 #include <assert.h>
+#include <stdio.h>
 
 #define MAX_PROOF_OF_WORK 0x1d00ffff    // highest value for difficulty target (higher values are less difficult)
 #define TARGET_TIMESPAN   (30 * 45)        // = 3.5*24*60*60; the targeted timespan between difficulty target adjustments
@@ -89,7 +90,7 @@ BRMerkleBlock *BRMerkleBlockParse(const uint8_t *buf, size_t bufLen)
 {
     BRMerkleBlock *block = (buf && 80 <= bufLen) ? BRMerkleBlockNew() : NULL;
     size_t off = 0, len = 0;
-
+    printf("In merkle parse");
     assert(buf != NULL || bufLen == 0);
 
     if (block) {
@@ -122,9 +123,12 @@ BRMerkleBlock *BRMerkleBlockParse(const uint8_t *buf, size_t bufLen)
             if (block->flags) memcpy(block->flags, &buf[off], len);
         }
 
-        BRSHA256_2(&block->blockHash, buf, 80);
-        BRScrypt(&block->powHash, sizeof(block->powHash), buf, 80, buf, 80, 1024, 1, 1);
+        BRScrypt_BlockHash(&block->blockHash, buf, 80);
+        printf("block timestamp %d\n", block->timestamp);
+       // BRScrypt(&block->powHash, sizeof(block->powHash), buf, 80, buf, 80, 1024, 1, 1);
+
     }
+
 
     return block;
 }
@@ -241,7 +245,7 @@ static UInt256 _BRMerkleBlockRootR(const BRMerkleBlock *block, size_t *hashIdx, 
 
             if (! UInt256IsZero(hashes[0]) && ! UInt256Eq(hashes[0], hashes[1])) {
                 if (UInt256IsZero(hashes[1])) hashes[1] = hashes[0]; // if right branch is missing, dup left branch
-                BRSHA256_2(&md, hashes, sizeof(hashes));
+                BRSHA256(&md, hashes, sizeof(hashes));
             }
             else *hashIdx = SIZE_MAX; // defend against (CVE-2012-2459)
         }
@@ -273,15 +277,15 @@ int BRMerkleBlockIsValid(const BRMerkleBlock *block, uint32_t currentTime)
     if (block->timestamp > currentTime + BLOCK_MAX_TIME_DRIFT) r = 0;
 
     // check if proof-of-work target is out of range
-    if (target == 0 || target & 0x00800000 || size > maxsize || (size == maxsize && target > maxtarget)) r = 0;
+    //if (target == 0 || target & 0x00800000 || size > maxsize || (size == maxsize && target > maxtarget)) r = 0;
 
-    if (size > 3) UInt32SetLE(&t.u8[size - 3], target);
-    else UInt32SetLE(t.u8, target >> (3 - size)*8);
+    //if (size > 3) UInt32SetLE(&t.u8[size - 3], target);
+    //else UInt32SetLE(t.u8, target >> (3 - size)*8);
 
-    for (int i = sizeof(t) - 1; r && i >= 0; i--) { // check proof-of-work
-        if (block->powHash.u8[i] < t.u8[i]) break;
-        if (block->powHash.u8[i] > t.u8[i]) r = 0;
-    }
+    //for (int i = sizeof(t) - 1; r && i >= 0; i--) { // check proof-of-work
+    //    if (block->powHash.u8[i] < t.u8[i]) break;
+    //    if (block->powHash.u8[i] > t.u8[i]) r = 0;
+    //}
 
     return r;
 }

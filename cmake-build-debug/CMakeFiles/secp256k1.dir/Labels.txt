@@ -1,0 +1,13 @@
+# Target labels
+ secp256k1
+# Source files and their labels
+/home/dolaned/eccmobile-core/cmake-build-debug/CMakeFiles/secp256k1
+/home/dolaned/eccmobile-core/cmake-build-debug/CMakeFiles/secp256k1.rule
+/home/dolaned/eccmobile-core/cmake-build-debug/CMakeFiles/secp256k1-complete.rule
+/home/dolaned/eccmobile-core/cmake-build-debug/deps/secp256k1/src/secp256k1-stamp/secp256k1-install.rule
+/home/dolaned/eccmobile-core/cmake-build-debug/deps/secp256k1/src/secp256k1-stamp/secp256k1-mkdir.rule
+/home/dolaned/eccmobile-core/cmake-build-debug/deps/secp256k1/src/secp256k1-stamp/secp256k1-download.rule
+/home/dolaned/eccmobile-core/cmake-build-debug/deps/secp256k1/src/secp256k1-stamp/secp256k1-update.rule
+/home/dolaned/eccmobile-core/cmake-build-debug/deps/secp256k1/src/secp256k1-stamp/secp256k1-patch.rule
+/home/dolaned/eccmobile-core/cmake-build-debug/deps/secp256k1/src/secp256k1-stamp/secp256k1-configure.rule
+/home/dolaned/eccmobile-core/cmake-build-debug/deps/secp256k1/src/secp256k1-stamp/secp256k1-build.rule

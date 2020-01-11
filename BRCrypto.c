@@ -999,3 +999,13 @@ void BRScrypt(void *dk, size_t dkLen, const void *pw, size_t pwLen, const void *
     mem_clean(v, 128*r*n);
     free(v);
 }
+
+void BRScrypt_BlockHash(void *md32, const void *data, size_t len)
+{
+    const uint8_t MESSAGE_DIGEST_SIZE = 32;
+
+    assert(md32 != NULL);
+    assert(data != NULL || len == 0);
+
+    BRScrypt(md32, MESSAGE_DIGEST_SIZE, data, len, data, len, 1024, 1, 1);
+}

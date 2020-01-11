@@ -1,0 +1,10 @@
+# Hashes of file build rules.
+8ec4b2b99039888041b89d0d3dfc5a94 CMakeFiles/secp256k1
+4c0becc810f1e0e457a6c1f9a5362961 CMakeFiles/secp256k1-complete
+63e2ce8600e8038620f909d6aab0f349 deps/secp256k1/src/secp256k1-stamp/secp256k1-build
+dd47d8cb33a3fe0c262a698c02e72fbe deps/secp256k1/src/secp256k1-stamp/secp256k1-configure
+778eeb555f0fdb815fa4d2d219efe855 deps/secp256k1/src/secp256k1-stamp/secp256k1-download
+7f7b5d59e0575460483c7223096bd394 deps/secp256k1/src/secp256k1-stamp/secp256k1-install
+a133122939ad2293fa117b5bfd7f35c2 deps/secp256k1/src/secp256k1-stamp/secp256k1-mkdir
+634aee2c3dc1be715101af443309f7b6 deps/secp256k1/src/secp256k1-stamp/secp256k1-patch
+b574ece01ea214219e29fd66b49c39ee deps/secp256k1/src/secp256k1-stamp/secp256k1-update

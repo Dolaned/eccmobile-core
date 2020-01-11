@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="ECCSPV"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake-build-debug\;CMake Files\cmake-build-debug\deps\;CMake Files\cmake-build-debug\deps\secp256k1\;CMake Files\cmake-build-debug\deps\secp256k1\tmp\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/dolaned/eccmobile-core/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/dolaned/eccmobile-core/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="secp256k1">
+				<Option working_dir="/home/dolaned/eccmobile-core/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 secp256k1"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/dolaned/eccmobile-core/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="spvtest">
+				<Option output="/home/dolaned/eccmobile-core/cmake-build-debug/spvtest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dolaned/eccmobile-core/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dolaned/eccmobile-core/secp256k1"/>
+					<Add directory="/home/dolaned/eccmobile-core/secp256k1/src"/>
+					<Add directory="/home/dolaned/eccmobile-core/secp256k1/include"/>
+					<Add directory="/home/dolaned/eccmobile-core/uthash"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 spvtest"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="spvtest/fast">
+				<Option output="/home/dolaned/eccmobile-core/cmake-build-debug/spvtest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dolaned/eccmobile-core/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dolaned/eccmobile-core/secp256k1"/>
+					<Add directory="/home/dolaned/eccmobile-core/secp256k1/src"/>
+					<Add directory="/home/dolaned/eccmobile-core/secp256k1/include"/>
+					<Add directory="/home/dolaned/eccmobile-core/uthash"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 spvtest/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dolaned/eccmobile-core/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/dolaned/eccmobile-core/BRAddress.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRAddress.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRBIP32Sequence.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRBIP32Sequence.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRBIP38Key.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRBIP38Key.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRBIP39Mnemonic.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRBIP39Mnemonic.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRBase58.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRBase58.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRBloomFilter.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRBloomFilter.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRCrypto.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRCrypto.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRKey.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRKey.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRMerkleBlock.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRMerkleBlock.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRPaymentProtocol.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRPaymentProtocol.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRPeer.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRPeer.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRPeerManager.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRPeerManager.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRSet.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRSet.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRTransaction.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRTransaction.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRWallet.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/BRWallet.h">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/test.c">
+			<Option target="spvtest"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/dolaned/eccmobile-core/cmake-build-debug/deps/secp256k1/tmp/secp256k1-cfgcmd.txt.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\deps\secp256k1\tmp\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
