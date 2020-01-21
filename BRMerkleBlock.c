@@ -90,8 +90,12 @@ BRMerkleBlock *BRMerkleBlockParse(const uint8_t *buf, size_t bufLen)
 {
     BRMerkleBlock *block = (buf && 80 <= bufLen) ? BRMerkleBlockNew() : NULL;
     size_t off = 0, len = 0;
-    printf("In merkle parse");
+    printf("In merkle parse \n");
     assert(buf != NULL || bufLen == 0);
+//       printf("sizeof offset %d \n", off);
+//       printf("sizeof buflen %d \n", bufLen);
+//       printf("sizeof unint32_t %d \n", sizeof(uint32_t));
+//       printf("sizeof UInt256 %d \n", sizeof(UInt256));
 
     if (block) {
         block->version = UInt32GetLE(&buf[off]);
@@ -106,6 +110,7 @@ BRMerkleBlock *BRMerkleBlockParse(const uint8_t *buf, size_t bufLen)
         off += sizeof(uint32_t);
         block->nonce = UInt32GetLE(&buf[off]);
         off += sizeof(uint32_t);
+        printf("sizeof offset %d \n", off);
 
         if (off + sizeof(uint32_t) <= bufLen) {
             block->totalTx = UInt32GetLE(&buf[off]);
@@ -122,10 +127,14 @@ BRMerkleBlock *BRMerkleBlockParse(const uint8_t *buf, size_t bufLen)
             block->flags = (off + len <= bufLen) ? malloc(len) : NULL;
             if (block->flags) memcpy(block->flags, &buf[off], len);
         }
+        printf("sizeof offset %d \n", off);
+        printf("sizeof buflen %d \n", bufLen);
 
-        BRScrypt_BlockHash(&block->blockHash, buf, 80);
+//        BRScrypt_BlockHash(&block->blockHash, buf, bufLen);
         printf("block timestamp %d\n", block->timestamp);
-       // BRScrypt(&block->powHash, sizeof(block->powHash), buf, 80, buf, 80, 1024, 1, 1);
+//        BRScrypt(&block->powHash, sizeof(block->powHash), buf, 80, buf, 82, 1024, 1, 1);
+
+        BRScrypt(&block->blockHash, sizeof(block->blockHash), buf, 80, buf, 80, 1024, 1, 1);
 
     }
 
@@ -272,10 +281,14 @@ int BRMerkleBlockIsValid(const BRMerkleBlock *block, uint32_t currentTime)
 
     // check if merkle root is correct
     if (block->totalTx > 0 && ! UInt256Eq(merkleRoot, block->merkleRoot)) r = 0;
+    printf("block merkle root %s\n", u256_hex_encode(block->merkleRoot));
+    printf("merkle root %s\n", u256_hex_encode(merkleRoot));
+    printf("r merkle roor %d\n", r);
 
     // check if timestamp is too far in future
     if (block->timestamp > currentTime + BLOCK_MAX_TIME_DRIFT) r = 0;
-
+    printf("current timestamp %d\n", currentTime);
+    printf("block timestamp %d\n", block->timestamp);
     // check if proof-of-work target is out of range
     //if (target == 0 || target & 0x00800000 || size > maxsize || (size == maxsize && target > maxtarget)) r = 0;
 

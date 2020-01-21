@@ -995,22 +995,22 @@ int BRKeyTests()
     uint8_t sig[72], pubKey[65];
     size_t sigLen, pkLen;
 
-    if (BRPrivKeyIsValid("QrF9uw6AP5yNCEYRz2qzqgbPuPtwkQ9AcssKMvkqrWq6m7oafTSL"))
+    if (BRPrivKeyIsValid("S6c56bnXQiBjk9mqSYE7ykVQ7NzrRz"))
         r = 0, fprintf(stderr, "***FAILED*** %s: BRPrivKeyIsValid() test 0\n", __func__);
 
     // mini private key format
-    if (! BRPrivKeyIsValid("QrF9uw6AP5yNCEYRz2qzqgbPuPtwkQ9AcssKMvkqrWq6m7oafTSL"))
+    if (! BRPrivKeyIsValid("QstqGjJCHRZAjmEuthrmjKADjfVXFPptXcrh92fu4KACReAuoozC"))
         r = 0, fprintf(stderr, "***FAILED*** %s: BRPrivKeyIsValid() test 1\n", __func__);
 
     printf("\n");
-    BRKeySetPrivKey(&key, "QrF9uw6AP5yNCEYRz2qzqgbPuPtwkQ9AcssKMvkqrWq6m7oafTSL");
+    BRKeySetPrivKey(&key, "QstqGjJCHRZAjmEuthrmjKADjfVXFPptXcrh92fu4KACReAuoozC");
     BRKeyAddress(&key, addr.s, sizeof(addr));
-    printf("privKey:QrF9uw6AP5yNCEYRz2qzqgbPuPtwkQ9AcssKMvkqrWq6m7oafTSL = %s\n", addr.s);
+    printf("privKey:QstqGjJCHRZAjmEuthrmjKADjfVXFPptXcrh92fu4KACReAuoozC = %s\n", addr.s);
 #if BITCOIN_TESTNET
-    if (! BRAddressEq(&addr, "ms8fwvXzrCoyatnGFRaLbepSqwGRxVJQF1"))
+    if (! BRAddressEq(&addr, "EcsJuBEJe2CxsQz5pAZXf2yiDRWjMfcBfy"))
         r = 0, fprintf(stderr, "***FAILED*** %s: BRKeySetPrivKey() test 1\n", __func__);
 #else
-    if (! BRAddressEq(&addr, "1CciesT23BNionJeXrbxmjc7ywfiyM4oLW"))
+    if (! BRAddressEq(&addr, "EcsJuBEJe2CxsQz5pAZXf2yiDRWjMfcBfy"))
         r = 0, fprintf(stderr, "***FAILED*** %s: BRKeySetPrivKey() test 1\n", __func__);
 #endif
 
@@ -1031,12 +1031,12 @@ int BRKeyTests()
 
 #if ! BITCOIN_TESTNET
     // uncompressed private key
-    if (! BRPrivKeyIsValid("5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF"))
+    if (! BRPrivKeyIsValid("QstqGjJCHRZAjmEuthrmjKADjfVXFPptXcrh92fu4KACReAuoozC"))
         r = 0, fprintf(stderr, "***FAILED*** %s: BRPrivKeyIsValid() test 3\n", __func__);
 
-    BRKeySetPrivKey(&key, "5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF");
+    BRKeySetPrivKey(&key, "QstqGjJCHRZAjmEuthrmjKADjfVXFPptXcrh92fu4KACReAuoozC");
     BRKeyAddress(&key, addr.s, sizeof(addr));
-    printf("privKey:5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF = %s\n", addr.s);
+    printf("privKey:QstqGjJCHRZAjmEuthrmjKADjfVXFPptXcrh92fu4KACReAuoozC = %s\n", addr.s);
     if (! BRAddressEq(&addr, "1CC3X2gu58d6wXUWMffpuzN9JAfTUWu4Kj"))
         r = 0, fprintf(stderr, "***FAILED*** %s: BRKeySetPrivKey() test 3\n", __func__);
 
@@ -1045,14 +1045,14 @@ int BRKeyTests()
 
     BRKeyPrivKey(&key, privKey1, sizeof(privKey1));
     printf("privKey:%s\n", privKey1);
-    if (strcmp(privKey1, "5Kb8kLf9zgWQnogidDA76MzPL6TsZZY36hWXMssSzNydYXYB9KF") != 0)
+    if (strcmp(privKey1, "QstqGjJCHRZAjmEuthrmjKADjfVXFPptXcrh92fu4KACReAuoozC") != 0)
         r = 0, fprintf(stderr, "***FAILED*** %s: BRKeyPrivKey() test 1\n", __func__);
 
     // compressed private key
-    if (! BRPrivKeyIsValid("KyvGbxRUoofdw3TNydWn2Z78dBHSy2odn1d3wXWN2o3SAtccFNJL"))
+    if (! BRPrivKeyIsValid("QstqGjJCHRZAjmEuthrmjKADjfVXFPptXcrh92fu4KACReAuoozC"))
         r = 0, fprintf(stderr, "***FAILED*** %s: BRPrivKeyIsValid() test 4\n", __func__);
 
-    BRKeySetPrivKey(&key, "KyvGbxRUoofdw3TNydWn2Z78dBHSy2odn1d3wXWN2o3SAtccFNJL");
+    BRKeySetPrivKey(&key, "QstqGjJCHRZAjmEuthrmjKADjfVXFPptXcrh92fu4KACReAuoozC");
     BRKeyAddress(&key, addr.s, sizeof(addr));
     printf("privKey:KyvGbxRUoofdw3TNydWn2Z78dBHSy2odn1d3wXWN2o3SAtccFNJL = %s\n", addr.s);
     if (! BRAddressEq(&addr, "1JMsC6fCtYWkTjPPdDrYX3we2aBrewuEM3"))
@@ -1063,7 +1063,7 @@ int BRKeyTests()
 
     BRKeyPrivKey(&key, privKey2, sizeof(privKey2));
     printf("privKey:%s\n", privKey2);
-    if (strcmp(privKey2, "KyvGbxRUoofdw3TNydWn2Z78dBHSy2odn1d3wXWN2o3SAtccFNJL") != 0)
+    if (strcmp(privKey2, "QstqGjJCHRZAjmEuthrmjKADjfVXFPptXcrh92fu4KACReAuoozC") != 0)
         r = 0, fprintf(stderr, "***FAILED*** %s: BRKeyPrivKey() test 2\n", __func__);
 #endif
 
